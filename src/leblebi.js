@@ -79,49 +79,23 @@ export default class Leblebi extends Component {
     });
   };
 
-  handleChange = ({ target }) => {
+  handleChange = async ({ target }) => {
     const { value } = target;
-    const { style } = this.state;
-    const { data = [], config = {}, classNames = {} } = this.props;
-    const { field = false, limit = 10 } = config;
+    const { config = {} } = this.props;
+    const { delay = 300 } = config;
 
-    const LeblebiItems = [];
-
-    const lang = config.lang || undefined;
-    data.forEach(item => {
-      let activeItem = item.toLocaleLowerCase(lang);
-      if (field) {
-        activeItem = item[field].toLocaleLowerCase(lang);
-      }
-
-      const wordStartIndex = activeItem.indexOf(value.toLocaleLowerCase(lang));
-      const wordEndIndex = wordStartIndex + value.length;
-      const check = wordStartIndex > -1;
-
-      if (check) {
-        const key = item.slice(wordStartIndex, wordEndIndex);
-        const leblebiWordStyle = this.objectToInlineStyle(style.leblebiWord);
-        const className = `leblebi-word${` ${classNames.leblebiWord || ""}`}`;
-        const custom = item.replace(
-          key,
-          `<span class="${className}" style="${leblebiWordStyle}">${key}</span>`
-        );
-
-        LeblebiItems.push({
-          raw: item,
-          custom
-        });
-      }
-
-      return false;
-    });
-
-    const result = value.length ? LeblebiItems.slice(0, limit) : [];
     this.setState({
-      result,
       activeItemIndex: -1,
       value
     });
+
+    if (this.timeOut) {
+      clearTimeout(this.timeOut);
+    }
+
+    this.timeOut = setTimeout(() => {
+      this.fetchData();
+    }, delay);
 
     return null;
   };
@@ -183,6 +157,63 @@ export default class Leblebi extends Component {
     return null;
   };
 
+  fetchData = async () => {
+    const { style, value } = this.state;
+    const { config = {}, classNames = {} } = this.props;
+    const { field = false, prop = false, limit = 10 } = config;
+    let { data } = this.props;
+
+    const LeblebiItems = [];
+
+    const lang = config.lang || undefined;
+    if (typeof data === "function") {
+      data = await data(value);
+    }
+
+    if (prop) {
+      data = this.objDeepGetProp(data, prop);
+    }
+
+    if(!Array.isArray(data)) {
+      data = [];
+    }
+
+    let activeItem;
+    data.forEach((item, index) => {
+      if (field) {
+        activeItem = item[field].toLocaleLowerCase(lang);
+      } else {
+        activeItem = item.toLocaleLowerCase(lang);
+      }
+
+      const wordStartIndex = activeItem.indexOf(value.toLocaleLowerCase(lang));
+      const wordEndIndex = wordStartIndex + value.length;
+      const check = wordStartIndex > -1;
+
+      if (check) {
+        const key = activeItem.slice(wordStartIndex, wordEndIndex);
+        const leblebiWordStyle = this.objectToInlineStyle(style.leblebiWord);
+        const className = `leblebi-word${` ${classNames.leblebiWord || ""}`}`;
+        const custom = activeItem.replace(
+          key,
+          `<span class="${className}" style="${leblebiWordStyle}">${key}</span>`
+        );
+
+        LeblebiItems.push({
+          id: item[field].id || index,
+          raw: activeItem,
+          custom
+        });
+      }
+
+      return false;
+    });
+
+    const result = value.length ? LeblebiItems.slice(0, limit) : [];
+
+    this.setState({ result });
+  };
+
   objectToInlineStyle = (obj = {}) => {
     let inlineStyle = "";
     Object.keys(obj).forEach(name => {
@@ -196,6 +227,23 @@ export default class Leblebi extends Component {
     });
 
     return inlineStyle;
+  };
+
+  objDeepGetProp = (obj, props) => {
+    if (!obj || typeof obj !== "object") {
+      return false;
+    }
+
+    let propsArr = props.split(".");
+    let active = obj;
+    propsArr.forEach(prop => {
+      if (active[prop]) {
+        active = active[prop];
+      } else {
+        active = false;
+      }
+    });
+    return active;
   };
 
   render() {
@@ -233,7 +281,7 @@ export default class Leblebi extends Component {
 
                 return (
                   <div
-                    key={item.raw}
+                    key={item.id}
                     index={index}
                     className={className}
                     onClick={() => this.handleClick(index)}
