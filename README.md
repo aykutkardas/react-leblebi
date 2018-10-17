@@ -18,12 +18,8 @@ yarn add react-leblebi
 import Leblebi from "react-leblebi";
 ```
 
-```html
-<Leblebi
-  data={data}
-  config={config}
-  classNames={classNames}
-  style={style} />
+```jsx
+<Leblebi data={data} config={config} classNames={classNames} style={style} />
 ```
 
 Data detail
@@ -52,6 +48,93 @@ const config = {
   field: "name"
 };
 ```
+
+---
+
+## Fetch Data API
+
+Dummy Data
+
+```json
+{
+  "items": [
+    {
+      "name": "react-leblebi"
+    },
+    {
+      "name": "leblebi"
+    }
+  ]
+}
+```
+
+Select 'items' prop and data 'name' field Config:
+
+```js
+{
+  props: "items",
+  field: "name",
+}
+```
+
+Usage
+
+```jsx
+<Leblebi
+  config={{
+    prop: "items",
+    field: "name",
+    delay: 300
+  }}
+  data={value =>
+    fetch("https://api.github.com/search/repositories?q=" + value).then(
+      response => response.json()
+    )
+  }
+/>
+```
+
+Advanced Dummy Data
+
+```json
+{
+  "data": {
+    "hydra:member": [
+      {
+        "name": "react-leblebi"
+      },
+      {
+        "name": "leblebi"
+      }
+    ]
+  }
+}
+```
+
+Config for deep prop
+
+```js
+{
+  props: "data.hydra:member",
+  field: "name",
+}
+```
+
+---
+
+## Config
+
+| Name           | Value    | Default | Description                  | Example                                              |
+| -------------- | -------- | ------- | ---------------------------- | ---------------------------------------------------- |
+| noDefaultStyle | true     | false   | Clear default inline style   | { noDefaultStyle: false}                             |
+| limit          | integer  | 10      | Maximum show result          | { limit: 5 }                                         |
+| field          | string   | false   | Select data field            | { field: 'name' }                                    |
+| props          | string   | false   | Select data props            | { props: 'data.items' }                              |
+| delay          | integer  | 300     | Set timeout for ajax request | { delay: 500 }                                       |
+| data           | array    | []      | Array data                   | { data: [] }                                         |
+| data           | function | []      | Fetch data request           | { data: (value) => fetch(url).then(res =>res.json) } |
+| styles         | object   | {}      | Customize inline style       | { leblebiInput: {color: red } }                      |
+| classNames     | object   | {}      | Add an additional class.     | { leblebiInput: 'form-control' }                     |
 
 ---
 
@@ -89,7 +172,7 @@ const style = {
 };
 ```
 
-```html
+```jsx
 <Leblebi style={style} />
 ```
 
@@ -151,7 +234,7 @@ const classNames = {
 };
 ```
 
-```html
+```jsx
 <Leblebi classNames={classNames} />
 ```
 
