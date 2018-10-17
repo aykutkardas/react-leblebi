@@ -133,6 +133,7 @@ Config for deep prop
 | delay          | integer  | 300     | Set timeout for ajax request | { delay: 500 }                                       |
 | data           | array    | []      | Array data                   | { data: [] }                                         |
 | data           | function | []      | Fetch data request           | { data: (value) => fetch(url).then(res =>res.json) } |
+| lang           | string   | null    | Data lang                    | { lang: 'tr-TR' }                                    |
 | styles         | object   | {}      | Customize inline style       | { leblebiInput: {color: red } }                      |
 | classNames     | object   | {}      | Add an additional class.     | { leblebiInput: 'form-control' }                     |
 
