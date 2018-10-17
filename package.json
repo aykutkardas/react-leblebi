@@ -1,0 +1,28 @@
+{
+  "name": "react-leblebi",
+  "version": "0.0.3",
+  "description": "Autocomplete component for React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aykutkardas/react-leblebi.git"
+  },
+  "keywords": [
+    "React",
+    "Autocomplete",
+    "Leblebi",
+    "React-Autocomplete"
+  ],
+  "author": "Aykut Kardaş",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aykutkardas/react-leblebi/issues"
+  },
+  "homepage": "https://github.com/aykutkardas/react-leblebi#readme",
+  "dependencies": {
+    "react": "^16.5.2"
+  }
+}
