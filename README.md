@@ -72,7 +72,7 @@ Select 'items' prop and data 'name' field Config:
 
 ```js
 {
-  props: "items",
+  prop: "items",
   field: "name",
 }
 ```
@@ -115,7 +115,7 @@ Config for deep prop
 
 ```js
 {
-  props: "data.hydra:member",
+  prop: "data.hydra:member",
   field: "name",
 }
 ```
@@ -124,18 +124,23 @@ Config for deep prop
 
 ## Config
 
-| Name           | Value    | Default | Description                  | Example                                              |
-| -------------- | -------- | ------- | ---------------------------- | ---------------------------------------------------- |
-| noDefaultStyle | true     | false   | Clear default inline style   | { noDefaultStyle: false}                             |
-| limit          | integer  | 10      | Maximum show result          | { limit: 5 }                                         |
-| field          | string   | false   | Select data field            | { field: 'name' }                                    |
-| props          | string   | false   | Select data props            | { props: 'data.items' }                              |
-| delay          | integer  | 300     | Set timeout for ajax request | { delay: 500 }                                       |
-| data           | array    | []      | Array data                   | { data: [] }                                         |
-| data           | function | []      | Fetch data request           | { data: (value) => fetch(url).then(res =>res.json) } |
-| lang           | string   | null    | Data lang                    | { lang: 'tr-TR' }                                    |
-| styles         | object   | {}      | Customize inline style       | { leblebiInput: {color: red } }                      |
-| classNames     | object   | {}      | Add an additional class.     | { leblebiInput: 'form-control' }                     |
+| Name           | Value   | Default | Description                  | Example                  |
+| -------------- | ------- | ------- | ---------------------------- | ------------------------ |
+| noDefaultStyle | boolean | false   | Clear default inline style   | { noDefaultStyle: false} |
+| limit          | integer | 10      | Maximum show result          | { limit: 5 }             |
+| field          | string  | false   | Select data field            | { field: 'name' }        |
+| prop           | string  | false   | Select data prop             | { prop: 'data.items' }   |
+| delay          | integer | 300     | Set timeout for ajax request | { delay: 500 }           |
+| lang           | string  | null    | Data lang                    | { lang: 'tr-TR' }        |
+
+## Attributes
+
+| Name       | Value    | Default | Description              | Example                                    |
+| ---------- | -------- | ------- | ------------------------ | ------------------------------------------ |
+| data       | array    | []      | Array data               | [{name: 'John'} , {name: 'Joe'}] or ['Jonh', 'Joe']          |
+| data       | function | []      | Fetch data request       | (value) => fetch(url).then(res =>res.json) |
+| style      | object   | {}      | Customize inline style   | { leblebiInput: {color: red } }            |
+| classNames | object   | {}      | Add an additional class. | { leblebiInput: 'form-control' }           |
 
 ---
 
