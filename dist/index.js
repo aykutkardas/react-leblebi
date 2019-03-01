@@ -38,6 +38,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _react = require("react");
 
+var _react2 = _interopRequireDefault(_react);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Leblebi = function (_Component) {
@@ -364,16 +366,16 @@ var Leblebi = function (_Component) {
       var _props$classNames = this.props.classNames,
           classNames = _props$classNames === undefined ? {} : _props$classNames;
 
-      return React.createElement(
+      return _react2.default.createElement(
         _react.Fragment,
         null,
-        React.createElement(
+        _react2.default.createElement(
           "div",
           {
             className: "leblebi " + (classNames.leblebi || ""),
             style: style.leblebi
           },
-          React.createElement("input", {
+          _react2.default.createElement("input", {
             className: "leblebi-input " + (classNames.leblebiInput || ""),
             onChange: this.handleChange,
             onKeyDown: this.handleKeyDown,
@@ -382,7 +384,7 @@ var Leblebi = function (_Component) {
             type: "text",
             style: style.leblebiInput
           }),
-          result.length > 0 && React.createElement(
+          result.length > 0 && _react2.default.createElement(
             "div",
             {
               className: "leblebi-result " + (classNames.leblebiResult || ""),
@@ -396,7 +398,7 @@ var Leblebi = function (_Component) {
                 className += " leblebi-item-active " + (classNames.leblebiItemActive || "");
               }
 
-              return React.createElement("div", {
+              return _react2.default.createElement("div", {
                 key: item.id,
                 index: index,
                 className: className,
