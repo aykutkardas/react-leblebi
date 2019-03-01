@@ -200,7 +200,7 @@ export default class Leblebi extends Component {
         );
 
         LeblebiItems.push({
-          id: item[field].id || index,
+          id: (item[field] && item[field].id) || index,
           raw: activeItem,
           custom
         });

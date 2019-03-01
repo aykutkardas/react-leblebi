@@ -236,7 +236,7 @@ var Leblebi = function (_Component) {
                   var custom = activeItem.replace(key, "<span class=\"" + className + "\" style=\"" + leblebiWordStyle + "\">" + key + "</span>");
 
                   LeblebiItems.push({
-                    id: item[field].id || index,
+                    id: item[field] && item[field].id || index,
                     raw: activeItem,
                     custom: custom
                   });
