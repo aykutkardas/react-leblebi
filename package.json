@@ -1,6 +1,6 @@
 {
   "name": "react-leblebi",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Autocomplete component for React",
   "main": "dist/index.js",
   "scripts": {
