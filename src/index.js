@@ -21,7 +21,7 @@ export default class Leblebi extends Component {
   componentWillMount() {
     const defaultStyle = {
       leblebi: {
-        display: "flex",
+        display: "inline-flex",
         flexDirection: "column"
       },
       leblebiInput: {},
@@ -174,19 +174,21 @@ export default class Leblebi extends Component {
       data = this.objDeepGetProp(data, prop);
     }
 
-    if(!Array.isArray(data)) {
+    if (!Array.isArray(data)) {
       data = [];
     }
 
     let activeItem;
     data.forEach((item, index) => {
       if (field) {
-        activeItem = item[field].toLocaleLowerCase(lang);
+        activeItem = item[field];
       } else {
-        activeItem = item.toLocaleLowerCase(lang);
+        activeItem = item;
       }
 
-      const wordStartIndex = activeItem.indexOf(value.toLocaleLowerCase(lang));
+      const wordStartIndex = activeItem
+        .toLocaleLowerCase(lang)
+        .indexOf(value.toLocaleLowerCase(lang));
       const wordEndIndex = wordStartIndex + value.length;
       const check = wordStartIndex > -1;
 

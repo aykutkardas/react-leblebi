@@ -220,12 +220,12 @@ var Leblebi = function (_Component) {
 
               data.forEach(function (item, index) {
                 if (field) {
-                  activeItem = item[field].toLocaleLowerCase(lang);
+                  activeItem = item[field];
                 } else {
-                  activeItem = item.toLocaleLowerCase(lang);
+                  activeItem = item;
                 }
 
-                var wordStartIndex = activeItem.indexOf(value.toLocaleLowerCase(lang));
+                var wordStartIndex = activeItem.toLocaleLowerCase(lang).indexOf(value.toLocaleLowerCase(lang));
                 var wordEndIndex = wordStartIndex + value.length;
                 var check = wordStartIndex > -1;
 
@@ -309,7 +309,7 @@ var Leblebi = function (_Component) {
     value: function componentWillMount() {
       var defaultStyle = {
         leblebi: {
-          display: "flex",
+          display: "inline-flex",
           flexDirection: "column"
         },
         leblebiInput: {},
