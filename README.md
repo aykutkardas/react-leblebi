@@ -2,6 +2,8 @@
 
 Simple autocomplete react component.
 
+## [Demo](https://codesandbox.io/s/oqm6pwy3l5?fontsize=14)
+
 ## Install
 
 ```sh
